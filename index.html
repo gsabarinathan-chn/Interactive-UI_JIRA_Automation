@@ -156,8 +156,8 @@
       return (
         <div className="steps">
           {steps.map((s, i) => {
-            const isDone = current > s.id || (current === TOTAL && s.id === TOTAL);
-            const isActive = current === s.id && s.id !== TOTAL;
+            const isDone = current > s.id || (s.id === TOTAL && current === TOTAL);
+            const isActive = current === s.id && !isDone;
             return (
               <React.Fragment key={s.id}>
                 <div className={`step ${isActive ? 'active' : ''} ${isDone ? 'done' : ''}`}>
@@ -428,7 +428,7 @@
                     <div className="btn-group">
                       <button className="btn-ghost" onClick={() => setStep(3)}>{icons.eye} Test Cases</button>
                       <button className="btn-ghost" onClick={copyScript}>{copied ? <>{icons.check} Copied!</> : <>{icons.copy} Copy</>}</button>
-                      <button className="btn-primary" onClick={downloadScript}>{icons.download} Download .ts</button>
+                      <button className="btn-primary" onClick={downloadScript}>{icons.download} Download .py</button>
                     </div>
                   </div>
                   <div className="code-wrapper">
