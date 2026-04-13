@@ -152,19 +152,24 @@
         { id: 3, label: 'Test Cases' },
         { id: 4, label: 'Playwright' },
       ];
+      const TOTAL = steps.length;
       return (
         <div className="steps">
-          {steps.map((s, i) => (
-            <React.Fragment key={s.id}>
-              <div className={`step ${current === s.id ? 'active' : ''} ${current > s.id ? 'done' : ''}`}>
-                <div className="step-circle">
-                  {current > s.id ? <Icon name="check" /> : <span>{s.id}</span>}
+          {steps.map((s, i) => {
+            const isDone = current > s.id || (current === TOTAL && s.id === TOTAL);
+            const isActive = current === s.id && s.id !== TOTAL;
+            return (
+              <React.Fragment key={s.id}>
+                <div className={`step ${isActive ? 'active' : ''} ${isDone ? 'done' : ''}`}>
+                  <div className="step-circle">
+                    {isDone ? <Icon name="check" /> : <span>{s.id}</span>}
+                  </div>
+                  <span className="step-label">{s.label}</span>
                 </div>
-                <span className="step-label">{s.label}</span>
-              </div>
-              {i < steps.length - 1 && <div className={`step-line ${current >= s.id + 1 ? 'done' : ''}`} />}
-            </React.Fragment>
-          ))}
+                {i < steps.length - 1 && <div className={`step-line ${current >= s.id + 1 ? 'done' : ''}`} />}
+              </React.Fragment>
+            );
+          })}
         </div>
       );
     }
