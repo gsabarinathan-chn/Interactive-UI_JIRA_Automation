@@ -172,7 +172,9 @@ Return ONLY the Python code, no explanations or markdown. Start directly with th
       return res.status(response.status).json({ error: data.error?.message || 'Claude API error' });
     }
 
-    const script = data.content?.[0]?.text || '';
+    let script = data.content?.[0]?.text || '';
+    // Strip markdown code fences if present
+    script = script.replace(/^```[\w]*\n?/gm, '').replace(/```\s*$/gm, '').trim();
     res.json({ script });
   } catch (err) {
     res.status(500).json({ error: err.message });
