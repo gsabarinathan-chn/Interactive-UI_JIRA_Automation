@@ -10,7 +10,7 @@ An interactive full-stack app that fetches JIRA stories, auto-generates comprehe
 
 - 🔗 **JIRA Integration** — Fetch any story via JIRA REST API v3
 - 🤖 **AI Test Case Generation** — Claude Sonnet 4 generates 6-10 test cases (positive, negative, edge)
-- 🎭 **Playwright Script Generation** — Converts test cases to TypeScript Playwright specs
+- 🎭 **Playwright Script Generation** — Converts test cases to Python  Playwright specs
 - 💾 **Download & Copy** — Export `.spec.ts` files instantly
 - 🎨 **Dark industrial UI** — Clean, fast, professional interface
 
