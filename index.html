@@ -274,7 +274,7 @@
         const blob = new Blob([playwrightScript], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url; a.download = `${story?.key || 'test'}.spec.ts`; a.click();
+        a.href = url; a.download = `test_${story?.key?.toLowerCase().replace('-','_') || 'test'}.py`; a.click();
       };
 
       const reset = () => { setStep(1); setStory(null); setTestCases([]); setPlaywrightScript(''); setErrors({}); };
@@ -418,7 +418,7 @@
                   <div className="card-header between">
                     <div>
                       <h2>{icons.code} Playwright Test Script</h2>
-                      <p>{story?.key}.spec.ts — TypeScript · {testCases.length} test cases</p>
+                      <p>test_{story?.key?.toLowerCase().replace('-','_')}.py — Python · {testCases.length} test cases</p>
                     </div>
                     <div className="btn-group">
                       <button className="btn-ghost" onClick={() => setStep(3)}>{icons.eye} Test Cases</button>
@@ -428,17 +428,17 @@
                   </div>
                   <div className="code-wrapper">
                     <div className="code-toolbar">
-                      <span className="code-lang">TypeScript</span>
-                      <span className="code-file">{story?.key}.spec.ts</span>
+                      <span className="code-lang">Python</span>
+                      <span className="code-file">test_{story?.key?.toLowerCase().replace('-','_')}.py</span>
                     </div>
                     <pre className="code-block"><code>{playwrightScript}</code></pre>
                   </div>
                 </div>
                 <div className="install-guide card">
                   <h3>🚀 Quick Start</h3>
-                  <div className="code-snippet"><code>npm init playwright@latest</code></div>
-                  <div className="code-snippet"><code>cp {story?.key}.spec.ts tests/</code></div>
-                  <div className="code-snippet"><code>npx playwright test {story?.key}.spec.ts</code></div>
+                  <div className="code-snippet"><code>pip install pytest-playwright</code></div>
+                  <div className="code-snippet"><code>playwright install chromium</code></div>
+                  <div className="code-snippet"><code>pytest test_{story?.key?.toLowerCase().replace('-','_')}.py -v</code></div>
                 </div>
               </div>
             )}
