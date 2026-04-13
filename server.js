@@ -133,22 +133,24 @@ Steps: ${tc.steps.join(' → ')}
 Expected: ${tc.expectedResult}`
   ).join('\n\n---\n\n');
 
-  const prompt = `You are a senior automation engineer. Convert the following test cases for JIRA story "${story?.key}: ${story?.summary}" into Playwright TypeScript test scripts.
+  const prompt = `You are a senior automation engineer. Convert the following test cases for JIRA story "${story?.key}: ${story?.summary}" into Playwright Python test scripts.
 
 TEST CASES:
 ${testCasesText}
 
-Generate a complete, runnable Playwright TypeScript test file. Follow these rules:
-1. Use TypeScript with proper imports
-2. Use page object model pattern where appropriate
+Generate a complete, runnable Playwright Python test file using pytest-playwright. Follow these rules:
+1. Use Python with proper imports (playwright.sync_api, pytest)
+2. Use pytest fixtures for browser/page setup
 3. Add meaningful comments
-4. Use proper async/await
-5. Include beforeEach/afterEach hooks
-6. Use descriptive test names
+4. Use synchronous Playwright API (sync_playwright)
+5. Include setup/teardown via pytest fixtures
+6. Use descriptive test function names prefixed with test_
 7. Add placeholder selectors like page.locator('[data-testid="element"]') - use realistic selectors based on context
-8. Include error handling where appropriate
+8. Include assertions using pytest assert statements
+9. Group related tests in a class prefixed with Test
+10. Add a conftest.py section as a comment at the top
 
-Return ONLY the TypeScript code, no explanations or markdown. Start directly with the import statements.`;
+Return ONLY the Python code, no explanations or markdown. Start directly with the import statements.`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
